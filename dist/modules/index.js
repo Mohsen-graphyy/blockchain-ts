@@ -23,9 +23,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Blockchain_1 = __importStar(require("./models/Blockchain"));
-const mohsenBlockchain = new Blockchain_1.default([(0, Blockchain_1.createGenesisBlock)()]);
-mohsenBlockchain.createNewBlock("Thomas gives 10 coins to Mohsen.");
-mohsenBlockchain.createNewBlock("Ali gives 134 coins to Alex.");
-mohsenBlockchain.createNewBlock("Sarah gives 56 coins to John.");
-console.log(mohsenBlockchain.chain);
+const crypto = __importStar(require("crypto-js"));
+function calculateHash(index, previousHash, timestamp, data) {
+    return crypto.SHA256(index + previousHash + timestamp + data).toString();
+}
+exports.default = calculateHash;
